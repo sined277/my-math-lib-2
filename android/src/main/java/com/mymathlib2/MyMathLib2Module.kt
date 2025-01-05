@@ -11,14 +11,27 @@ class MyMathLib2Module(reactContext: ReactApplicationContext) : ReactContextBase
         return "MyMathLib2"
     }
 
-    // Example method
-    // See https://reactnative.dev/docs/native-modules-android
     @ReactMethod
     fun multiply(a: Int, b: Int, promise: Promise) {
-    
-      promise.resolve(a * b)
-    
+        promise.resolve(a * b)
     }
 
-    
+    @ReactMethod
+    fun add(a: Int, b: Int, promise: Promise) {
+        promise.resolve(a + b)
+    }
+
+    @ReactMethod
+    fun subtract(a: Int, b: Int, promise: Promise) {
+        promise.resolve(a - b)
+    }
+
+    @ReactMethod
+    fun divide(a: Int, b: Int, promise: Promise) {
+        if (b == 0) {
+            promise.reject("DIVIDE_BY_ZERO", "Cannot divide by zero")
+        } else {
+            promise.resolve(a / b)
+        }
+    }
 }
